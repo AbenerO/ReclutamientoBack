@@ -108,6 +108,13 @@ class MenuOpcion extends Model
     ];
 
 
+    protected static function booted(): void
+    {
+        static::deleting(function (MenuOpcion $menu) {
+            static::where('parent_id', $menu->id)->get()->each->delete();
+        });
+    }
+
     /**
      * Accessor for relationships
      *

@@ -29,9 +29,7 @@ return new class extends Migration
 
             $table->foreign('parent_id', 'fk_menu_opciones_parent')
                 ->references('id')
-                ->on('menu_opciones')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->on('menu_opciones');
 
             $table->timestamps();
         });
