@@ -94,6 +94,7 @@ button:hover {
     border-left: 4px solid #1d3b2f;
     font-family: Consolas, monospace;
     display: none;
+    white-space: pre-line;
 }
 
 .salida.visible {

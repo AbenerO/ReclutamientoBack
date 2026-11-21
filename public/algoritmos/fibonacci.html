@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Suma de terminos pares de fibonacci</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<header>
+    <div class="titulo">Algoritmos numericos</div>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+</nav>
+
+<main>
+    <h2>Ejercicio 3 - Suma de términos pares de Fibonacci</h2>
+    <p>Dado un número entero n, generar los primeros n términos de la sucesión de Fibonacci y calcular la suma de los
+        términos pares.</p>
+
+    <form id="formulario">
+        <fieldset>
+            <label>Entrada</label>
+            <label for="n">n = </label>
+            <input type="text" id="n">
+            <button type="submit">Calcular</button>
+            <button type="button" class="sec" id="limpiar">Limpiar</button>
+        </fieldset>
+    </form>
+
+    <div id="salida" class="salida"></div>
+
+    <h2>Casos de prueba</h2>
+    <table>
+        <tr>
+            <th>Entrada</th>
+            <th>Salida esperada</th>
+        </tr>
+        <tr>
+            <td class="mono">n = 7</td>
+            <td class="mono">Sucesión: 0 1 1 2 3 5 8<br>Suma de pares: 10</td>
+        </tr>
+        <tr>
+            <td class="mono">n = 5</td>
+            <td class="mono">Sucesión: 0 1 1 2 3<br>Suma de pares: 2</td>
+        </tr>
+    </table>
+</main>
+
+<script src="js/algoritmos.js"></script>
+<script>
+    iniciarEjercicio({
+        campos: [{ id: 'n', min: 2, max: 40 }],
+        calcular: function (valores) {
+            const serie = fibonacci(valores[0]);
+            return 'Sucesión: ' + serie.join(' ') + '\nSuma de pares: ' + sumaParesFibonacci(serie);
+        }
+    });
+</script>
+</body>
+</html>
