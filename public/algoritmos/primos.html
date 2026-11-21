@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Numeros primos en un rango</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+<header>
+    <div class="titulo">Algoritmos numéricos</div>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+</nav>
+
+<main>
+    <h2>Números primos en un rango</h2>
+    <p>Este es un ejemplo de cómo encontrar los números primos en un rango determinado.</p>
+
+    <form id="formulario">
+        <fieldset>
+            <label>Entrada</label>
+            <label for="a">a =</label>
+            <input type="text" id="a">
+            <label for="b">b =</label>
+            <input type="text" id="b">
+            <button type="submit">Calcular</button>
+            <button type="button" class="sec" id="limpiar">Limpiar</button>
+        </fieldset>
+    </form>
+
+    <div id="salida" class="salida"></div>
+
+    <h3>Caso de prueba</h3>
+    <table>
+        <tr>
+            <th>entrada</th>
+            <th>salida</th>
+        </tr>
+        <tr>
+            <td class="mono">a = 1, b = 10</td>
+            <td class="mono">2, 3, 5, 7</td>
+        </tr>
+        <tr>
+            <td class="mono">a = 14, b = 16</td>
+            <td class="mono">no se encontraron números primos</td>
+        </tr>
+        <tr>
+            <td class="mono">a = 8, b = 12</td>
+            <td class="mono">11</td>
+        </tr>
+    </table>
+</main>
+
+<script src="js/algoritmos.js"></script>
+<script>
+    iniciarEjercicio({
+        campos: [
+            {id: 'a', min: 1, max: 100000},
+            {id: 'b', min: 1, max: 100000}
+        ],
+        validar: function (valores) {
+            return valores[0] > valores[1] ? 'a debe ser menor o igual que b' : null;
+        },
+        calcular: function (valores) {
+            const primos = primosEnRango(valores[0], valores[1]);
+            return primos.length > 0 ? primos.join(', ') : 'No se encontraron números primos';
+        }
+    });
+</script>
+</body>
+</html>
