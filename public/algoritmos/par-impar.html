@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Par o impar</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+<header>
+    <div class="titulo">Algoritmos numéricos</div>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+</nav>
+
+<main>
+    <h2>Ejercicio 1 - Número par o impar</h2>
+    <p>Dado un número entero, determinar si es par o impar.</p>
+
+    <form id="formulario" novalidate>
+        <fieldset>
+            <label>Entrada</label>
+            <label for="n">n =</label>
+            <input type="text" id="n" autocomplete="off">
+            <button type="submit">Evaluar</button>
+            <button type="button" class="sec" id="limpiar">Limpiar</button>
+            <div class="nota">Restricción: -100000 &le; n &le; 100000</div>
+        </fieldset>
+    </form>
+
+    <div id="salida" class="salida"></div>
+
+    <h3>Casos de prueba</h3>
+    <table>
+        <tr>
+            <th>Entrada</th>
+            <th>Salida esperada</th>
+        </tr>
+        <tr>
+            <td class="mono">n = 4</td>
+            <td class="mono">PAR</td>
+        </tr>
+        <tr>
+            <td class="mono">n = 7</td>
+            <td class="mono">IMPAR</td>
+        </tr>
+        <tr>
+            <td class="mono">n = 0</td>
+            <td class="mono">PAR</td>
+        </tr>
+        <tr>
+            <td class="mono">n = -3</td>
+            <td class="mono">IMPAR</td>
+        </tr>
+    </table>
+</main>
+
+<script src="js/algoritmos.js"></script>
+<script>
+    iniciarEjercicio({
+        campos: [{ id: 'n', min: -100000, max: 100000 }],
+        calcular: function (valores) { return parOImpar(valores[0]); }
+    });
+</script>
+</body>
+</html>
