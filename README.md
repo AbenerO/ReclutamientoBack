@@ -70,6 +70,21 @@ Usuario inicial: `admin` / `12345` (rol SuperAdministrador). El login usa el **u
 | `FRONTEND_URL` | `http://localhost:3000` | Origen permitido por CORS |
 | `SANCTUM_STATEFUL_DOMAINS` | `localhost:3000` | Dominios del front que usan cookies de sesión |
 
+## Fase 2 — Algoritmos numéricos
+
+Tres ejercicios en HTML, CSS, JavaScript, en `public/algoritmos/`.
+Con el servidor del backend levantado, la página de inicio es:
+
+- `php artisan serve`: <http://localhost:8000/algoritmos/index.html>
+- Laragon (host virtual automático): <http://reclutamientoback.test/algoritmos/index.html>
+
+| Ejercicio | Página | Capturas |
+|---|---|---|
+| 1. Número par o impar | `public/algoritmos/par-impar.html` | [`docs/Algoritmos/Ejercicio#1`](docs/Algoritmos/Ejercicio%231) |
+| 2. Números primos en un rango | `public/algoritmos/primos.html` | [`docs/Algoritmos/Ejercicio#2`](docs/Algoritmos/Ejercicio%232) |
+| 3. Suma de pares de Fibonacci | `public/algoritmos/fibonacci.html` | [`docs/Algoritmos/Ejercicio#3`](docs/Algoritmos/Ejercicio%233) |
+
+
 ## Crear un módulo nuevo
 
 ```bash
