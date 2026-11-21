@@ -1,0 +1,1 @@
+{"Modelo":"OrdenExamen","Ruta":"api/orden_examenes","columnastypes":"  orden_id: number;\n  tipo_examen_id: number;\n  estado_orden_examen_id: number;","columnas":{"orden_id":"integer","tipo_examen_id":"integer","estado_orden_examen_id":"integer"},"modeloSeparado":"Orden Examen"}

@@ -1,0 +1,1 @@
+{"Modelo":"CategoriaExamen","Ruta":"api/categorias_examen","columnastypes":"  nombre: string;\n  estado: number;","columnas":{"nombre":"string","estado":"integer"},"modeloSeparado":"Categoria Examen"}

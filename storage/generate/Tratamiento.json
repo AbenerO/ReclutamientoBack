@@ -1,0 +1,1 @@
+{"Modelo":"Tratamiento","Ruta":"api/tratamientos","columnastypes":"  consulta_id: number;\n  descripcion: string;\n  indicaciones: string;\n  duracion_dias: number;","columnas":{"consulta_id":"integer","descripcion":"string","indicaciones":"string","duracion_dias":"integer"},"modeloSeparado":"Tratamiento"}

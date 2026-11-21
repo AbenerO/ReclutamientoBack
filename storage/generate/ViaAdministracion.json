@@ -1,0 +1,1 @@
+{"Modelo":"ViaAdministracion","Ruta":"api/vias_administracion","columnastypes":"  nombre: string;\n  estado: number;","columnas":{"nombre":"string","estado":"integer"},"modeloSeparado":"Via Administracion"}

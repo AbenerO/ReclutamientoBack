@@ -1,0 +1,1 @@
+{"Modelo":"EstadoOrdenLaboratorio","Ruta":"api/estados_orden_laboratorio","columnastypes":"  nombre: string;\n  estado: number;","columnas":{"nombre":"string","estado":"integer"},"modeloSeparado":"Estado Orden Laboratorio"}

@@ -1,0 +1,1 @@
+{"Modelo":"Diagnostico","Ruta":"api/diagnosticos","columnastypes":"  consulta_id: number;\n  codigo_cie10: string;\n  descripcion: string;\n  tipo: string;\n  observaciones: string;","columnas":{"consulta_id":"integer","codigo_cie10":"string","descripcion":"string","tipo":"string","observaciones":"string"},"modeloSeparado":"Diagnostico"}

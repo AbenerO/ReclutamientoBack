@@ -1,0 +1,1 @@
+{"Modelo":"Prioridad","Ruta":"api/prioridades","columnastypes":"  nombre: string;\n  estado: number;","columnas":{"nombre":"string","estado":"integer"},"modeloSeparado":"Prioridad"}
