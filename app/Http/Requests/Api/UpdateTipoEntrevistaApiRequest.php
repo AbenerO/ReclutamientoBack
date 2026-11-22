@@ -19,7 +19,7 @@ class UpdateTipoEntrevistaApiRequest extends FormRequest
             'nombre' => [
                 'required',
                 'string',
-                Rule::unique('tipos_entrevista', 'nombre')->ignore($this->route('tipoEntrevista')?->id ?? null, 'id'),
+                Rule::unique('tipos_entrevista', 'nombre')->ignore($this->route('tipoEntrevista'), 'id'),
             ],
         ];
 

@@ -43,7 +43,7 @@ class UpdateCandidatoApiRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
-                Rule::unique('candidatos', 'email')->ignore($this->route('candidato')?->id ?? null, 'id'),
+                Rule::unique('candidatos', 'email')->ignore($this->route('candidato'), 'id'),
             ],
             'telefono' => [
                 'required',

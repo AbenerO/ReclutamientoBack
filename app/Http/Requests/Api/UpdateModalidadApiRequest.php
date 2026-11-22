@@ -19,7 +19,7 @@ class UpdateModalidadApiRequest extends FormRequest
             'nombre' => [
                 'required',
                 'string',
-                Rule::unique('modalidades', 'nombre')->ignore($this->route('modalidad')?->id ?? null, 'id'),
+                Rule::unique('modalidades', 'nombre')->ignore($this->route('modalidad'), 'id'),
             ],
         ];
 

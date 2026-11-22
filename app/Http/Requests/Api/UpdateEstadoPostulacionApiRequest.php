@@ -19,7 +19,7 @@ class UpdateEstadoPostulacionApiRequest extends FormRequest
             'nombre' => [
                 'required',
                 'string',
-                Rule::unique('estados_postulacion', 'nombre')->ignore($this->route('estadoPostulacion')?->id ?? null, 'id'),
+                Rule::unique('estados_postulacion', 'nombre')->ignore($this->route('estadoPostulacion'), 'id'),
             ],
             'orden' => [
                 'required',

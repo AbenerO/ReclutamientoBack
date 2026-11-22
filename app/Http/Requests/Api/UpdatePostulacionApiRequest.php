@@ -21,7 +21,7 @@ class UpdatePostulacionApiRequest extends FormRequest
                 'integer',
                 Rule::unique('postulaciones', 'candidato_id')
                     ->where('vacante_id', $this->vacante_id)
-                    ->ignore($this->route('postulacion')?->id ?? null, 'id'),
+                    ->ignore($this->route('postulacion'), 'id'),
             ],
             'vacante_id' => [
                 'required',

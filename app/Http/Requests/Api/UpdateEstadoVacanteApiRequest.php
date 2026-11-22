@@ -19,7 +19,7 @@ class UpdateEstadoVacanteApiRequest extends FormRequest
             'nombre' => [
                 'required',
                 'string',
-                Rule::unique('estados_vacante', 'nombre')->ignore($this->route('estadoVacante')?->id ?? null, 'id'),
+                Rule::unique('estados_vacante', 'nombre')->ignore($this->route('estadoVacante'), 'id'),
             ],
         ];
 

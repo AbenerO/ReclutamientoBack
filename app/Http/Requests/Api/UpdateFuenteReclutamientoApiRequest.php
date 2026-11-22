@@ -19,7 +19,7 @@ class UpdateFuenteReclutamientoApiRequest extends FormRequest
             'nombre' => [
                 'required',
                 'string',
-                Rule::unique('fuentes_reclutamiento', 'nombre')->ignore($this->route('fuenteReclutamiento')?->id ?? null, 'id'),
+                Rule::unique('fuentes_reclutamiento', 'nombre')->ignore($this->route('fuenteReclutamiento'), 'id'),
             ],
         ];
 
