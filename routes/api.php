@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     require __DIR__ . '/reclutamiento/candidatos.php';
     require __DIR__ . '/reclutamiento/postulaciones.php';
     require __DIR__ . '/reclutamiento/entrevistas.php';
+    require __DIR__ . '/reclutamiento/reportes.php';
 });
 
 Route::post('menu-opcions/actualizar/orden', [MenuOpcionApiController::class, 'actualizarOrden'])->name('menu-opcions.getColumnas');

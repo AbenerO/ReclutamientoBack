@@ -73,6 +73,18 @@ class MenuReclutamientoSeeder extends Seeder
                 'orden' => MenuOpcion::max('orden') + 1,
             ]
         );
+
+        $this->crearMenuConPermiso(
+            ['titulo' => 'Reporte por Estado', 'parent_id' => $moduloReclutamiento->id],
+            [
+                'titulo_seccion' => null,
+                'ruta' => 'reportes-postulaciones-por-estado',
+                'icono' => 'ri-bar-chart-box-line',
+                'action' => 'ver reporte postulaciones',
+                'subject' => 'ReportePostulacion',
+                'orden' => MenuOpcion::max('orden') + 1,
+            ]
+        );
     }
 
     private function crearMenuConPermiso(array $uniqueAttributes, array $values): MenuOpcion

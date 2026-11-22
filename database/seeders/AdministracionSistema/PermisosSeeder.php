@@ -62,6 +62,9 @@ class PermisosSeeder extends Seeder
                 ['name' => 'ver postulaciones', 'subject' => 'Postulacion'],
                 ['name' => 'crear postulaciones', 'subject' => 'Postulacion'],
                 ['name' => 'editar postulaciones', 'subject' => 'Postulacion'],
+
+                // Reportes
+                ['name' => 'ver reporte postulaciones', 'subject' => 'ReportePostulacion'],
             ],
 
             // ========================================
