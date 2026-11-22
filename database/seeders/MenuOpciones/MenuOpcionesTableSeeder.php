@@ -17,6 +17,7 @@ class MenuOpcionesTableSeeder extends Seeder
         MenuOpcion::query()->update(['orden' => 0]);
         $this->call([
             MenuInicioSeeder::class,
+            MenuReclutamientoSeeder::class,
             MenuAdministracionSeeder::class,
         ]);
     }

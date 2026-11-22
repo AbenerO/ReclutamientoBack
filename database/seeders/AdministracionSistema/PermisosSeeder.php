@@ -43,6 +43,29 @@ class PermisosSeeder extends Seeder
             ],
 
             // ========================================
+            // MÓDULO: RECLUTAMIENTO
+            // ========================================
+            'reclutamiento' => [
+                // Vacantes
+                ['name' => 'ver vacantes', 'subject' => 'Vacante'],
+                ['name' => 'crear vacantes', 'subject' => 'Vacante'],
+                ['name' => 'editar vacantes', 'subject' => 'Vacante'],
+                ['name' => 'eliminar vacantes', 'subject' => 'Vacante'],
+
+                // Candidatos
+                ['name' => 'ver candidatos', 'subject' => 'Candidato'],
+                ['name' => 'crear candidatos', 'subject' => 'Candidato'],
+                ['name' => 'editar candidatos', 'subject' => 'Candidato'],
+                ['name' => 'eliminar candidatos', 'subject' => 'Candidato'],
+
+                // Postulaciones
+                ['name' => 'ver postulaciones', 'subject' => 'Postulacion'],
+                ['name' => 'crear postulaciones', 'subject' => 'Postulacion'],
+                ['name' => 'editar postulaciones', 'subject' => 'Postulacion'],
+                ['name' => 'eliminar postulaciones', 'subject' => 'Postulacion'],
+            ],
+
+            // ========================================
             // MÓDULO: NOTIFICACIONES
             // ========================================
             'notificaciones' => [

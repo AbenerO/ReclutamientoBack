@@ -46,6 +46,23 @@ class AdministradorSeeder extends Seeder
             'Administracion Ver Menu Listado Usuarios',
 
             // ========================================
+            // RECLUTAMIENTO
+            // ========================================
+            'Ver Menu Reclutamiento',
+            'ver vacantes',
+            'crear vacantes',
+            'editar vacantes',
+            'eliminar vacantes',
+            'ver candidatos',
+            'crear candidatos',
+            'editar candidatos',
+            'eliminar candidatos',
+            'ver postulaciones',
+            'crear postulaciones',
+            'editar postulaciones',
+            'eliminar postulaciones',
+
+            // ========================================
             // NOTIFICACIONES
             // ========================================
             'ver notificaciones',
