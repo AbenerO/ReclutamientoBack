@@ -16,21 +16,17 @@ use Spatie\QueryBuilder\QueryBuilder;
 /**
  * Class VacanteApiController
  */
-class VacanteApiController extends AppbaseController
+class VacanteApiController extends AppbaseController implements HasMiddleware
 {
-
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver vacantes', only: ['index', 'show']),
-  //            new Middleware('abilities:crear vacantes', only: ['store']),
-  //            new Middleware('abilities:editar vacantes', only: ['update']),
-  //            new Middleware('abilities:eliminar vacantes', only: ['destroy']),
-  //        ];
-  //    }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:ver vacantes', only: ['index', 'show']),
+            new Middleware('permission:crear vacantes', only: ['store']),
+            new Middleware('permission:editar vacantes', only: ['update']),
+            new Middleware('permission:eliminar vacantes', only: ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the VacanteTableSeeder.
@@ -39,7 +35,7 @@ class VacanteApiController extends AppbaseController
     public function index(Request $request): JsonResponse
     {
         $vacantes = QueryBuilder::for(Vacante::class)
-            ->with([])
+            ->allowedIncludes(['unidad', 'modalidad', 'estadoVacante'])
             ->allowedFilters(['unidad_id','titulo','descripcion','modalidad_id','salario_minimo','salario_maximo','ubicacion','estado_vacante_id','user_id'])
             ->allowedSorts(['unidad_id','titulo','descripcion','modalidad_id','salario_minimo','salario_maximo','ubicacion','estado_vacante_id','user_id'])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
@@ -67,8 +63,12 @@ class VacanteApiController extends AppbaseController
      * Display the specified Vacante.
      * GET|HEAD /vacantes/{id}
      */
-    public function show(Vacante $vacante)
+    public function show($id)
     {
+        $vacante = QueryBuilder::for(Vacante::class)
+            ->allowedIncludes(['unidad', 'modalidad', 'estadoVacante'])
+            ->findOrFail($id);
+
         return $this->sendResponse($vacante->toArray(), 'Vacante recuperado con éxito.');
     }
 

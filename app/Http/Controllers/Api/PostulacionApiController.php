@@ -8,29 +8,26 @@ use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Requests\Api\CreatePostulacionApiRequest;
 use App\Http\Requests\Api\UpdatePostulacionApiRequest;
 use App\Models\Postulacion;
+use App\Models\PostulacionHistorial;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Spatie\QueryBuilder\QueryBuilder;
 
 /**
  * Class PostulacionApiController
  */
-class PostulacionApiController extends AppbaseController
+class PostulacionApiController extends AppbaseController implements HasMiddleware
 {
-
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver postulaciones', only: ['index', 'show']),
-  //            new Middleware('abilities:crear postulaciones', only: ['store']),
-  //            new Middleware('abilities:editar postulaciones', only: ['update']),
-  //            new Middleware('abilities:eliminar postulaciones', only: ['destroy']),
-  //        ];
-  //    }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:ver postulaciones', only: ['index', 'show']),
+            new Middleware('permission:crear postulaciones', only: ['store']),
+            new Middleware('permission:editar postulaciones', only: ['update', 'cambiarEstado']),
+        ];
+    }
 
     /**
      * Display a listing of the PostulacionTableSeeder.
@@ -39,9 +36,9 @@ class PostulacionApiController extends AppbaseController
     public function index(Request $request): JsonResponse
     {
         $postulaciones = QueryBuilder::for(Postulacion::class)
-            ->with([])
-            ->allowedFilters(['candidato_id','vacante_id','fecha_postulacion','estado_postulacion_id','fuente_reclutamiento_id','user_id'])
-            ->allowedSorts(['candidato_id','vacante_id','fecha_postulacion','estado_postulacion_id','fuente_reclutamiento_id','user_id'])
+            ->allowedIncludes(['candidato', 'vacante', 'estadoPostulacion', 'fuenteReclutamiento'])
+            ->allowedFilters(['candidato_id', 'vacante_id', 'fecha_postulacion', 'estado_postulacion_id', 'fuente_reclutamiento_id', 'user_id'])
+            ->allowedSorts(['candidato_id', 'vacante_id', 'fecha_postulacion', 'estado_postulacion_id', 'fuente_reclutamiento_id', 'user_id'])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
             ->paginate($request->get('per_page', 10));
 
@@ -55,11 +52,15 @@ class PostulacionApiController extends AppbaseController
      */
     public function store(CreatePostulacionApiRequest $request): JsonResponse
     {
-        $input = $request->all();
+        $postulacion = DB::transaction(function () use ($request) {
+            $postulacion = Postulacion::create($request->all());
 
-        $postulaciones = Postulacion::create($input);
+            $this->registrarHistorial($postulacion, null, $postulacion->estado_postulacion_id);
 
-        return $this->sendResponse($postulaciones->toArray(), 'Postulacion creado con éxito.');
+            return $postulacion;
+        });
+
+        return $this->sendResponse($postulacion->toArray(), 'Postulacion creada con éxito.');
     }
 
 
@@ -67,9 +68,13 @@ class PostulacionApiController extends AppbaseController
      * Display the specified Postulacion.
      * GET|HEAD /postulaciones/{id}
      */
-    public function show(Postulacion $postulacion)
+    public function show($id)
     {
-        return $this->sendResponse($postulacion->toArray(), 'Postulacion recuperado con éxito.');
+        $postulacion = QueryBuilder::for(Postulacion::class)
+            ->allowedIncludes(['candidato', 'vacante', 'estadoPostulacion', 'fuenteReclutamiento'])
+            ->findOrFail($id);
+
+        return $this->sendResponse($postulacion->toArray(), 'Postulacion recuperada con éxito.');
     }
 
 
@@ -81,24 +86,52 @@ class PostulacionApiController extends AppbaseController
     public function update(UpdatePostulacionApiRequest $request, $id): JsonResponse
     {
         $postulacion = Postulacion::findOrFail($id);
-        $postulacion->update($request->validated());
-        return $this->sendResponse($postulacion, 'Postulacion actualizado con éxito.');
+        $estadoAnterior = $postulacion->estado_postulacion_id;
+
+        DB::transaction(function () use ($request, $postulacion, $estadoAnterior) {
+            $postulacion->update($request->validated());
+
+            if ($postulacion->estado_postulacion_id != $estadoAnterior) {
+                $this->registrarHistorial($postulacion, $estadoAnterior, $postulacion->estado_postulacion_id);
+            }
+        });
+
+        return $this->sendResponse($postulacion, 'Postulacion actualizada con éxito.');
     }
 
-    /**
-    * Remove the specified Postulacion from storage.
-    * DELETE /postulaciones/{id}
-    */
-    public function destroy(Postulacion $postulacion): JsonResponse
+    public function cambiarEstado(Request $request, $id): JsonResponse
     {
-        $postulacion->delete();
-        return $this->sendResponse(null, 'Postulacion eliminado con éxito.');
+        $request->validate([
+            'estado_postulacion_id' => 'required|integer|exists:estados_postulacion,id',
+        ]);
+
+        $postulacion = Postulacion::findOrFail($id);
+        $estadoAnterior = $postulacion->estado_postulacion_id;
+
+        if ($postulacion->estado_postulacion_id != $request->estado_postulacion_id) {
+            DB::transaction(function () use ($request, $postulacion, $estadoAnterior) {
+                $postulacion->update(['estado_postulacion_id' => $request->estado_postulacion_id]);
+                $this->registrarHistorial($postulacion, $estadoAnterior, $postulacion->estado_postulacion_id);
+            });
+        }
+
+        return $this->sendResponse($postulacion->load('estadoPostulacion'), 'Estado actualizado con éxito.');
+    }
+
+    private function registrarHistorial(Postulacion $postulacion, $estadoAnterior, $estadoNuevo): void
+    {
+        PostulacionHistorial::create([
+            'postulacion_id' => $postulacion->id,
+            'estado_anterior_id' => $estadoAnterior,
+            'estado_nuevo_id' => $estadoNuevo,
+            'user_id' => usuarioAutenticado()->id,
+        ]);
     }
 
     /**
-    * Get columns of the table
-    * GET /postulaciones/columns
-    */
+     * Get columns of the table
+     * GET /postulaciones/columns
+     */
     public function getColumnas(): JsonResponse
     {
 
@@ -112,7 +145,7 @@ class PostulacionApiController extends AppbaseController
             'columns' => array_values($columnasSinTimesTamps),
             'nombreDelModelo' => 'Postulacion',
             'nombreDeTabla' => $nombreDeTabla,
-            'ruta' => 'api/'.$nombreDeTabla,
+            'ruta' => 'api/' . $nombreDeTabla,
         ];
 
         return $this->sendResponse($data, 'Columnas de la tabla postulaciones recuperadas con éxito.');

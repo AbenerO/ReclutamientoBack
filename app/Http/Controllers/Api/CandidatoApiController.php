@@ -16,21 +16,17 @@ use Spatie\QueryBuilder\QueryBuilder;
 /**
  * Class CandidatoApiController
  */
-class CandidatoApiController extends AppbaseController
+class CandidatoApiController extends AppbaseController implements HasMiddleware
 {
-
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver candidatos', only: ['index', 'show']),
-  //            new Middleware('abilities:crear candidatos', only: ['store']),
-  //            new Middleware('abilities:editar candidatos', only: ['update']),
-  //            new Middleware('abilities:eliminar candidatos', only: ['destroy']),
-  //        ];
-  //    }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:ver candidatos', only: ['index', 'show']),
+            new Middleware('permission:crear candidatos', only: ['store']),
+            new Middleware('permission:editar candidatos', only: ['update']),
+            new Middleware('permission:eliminar candidatos', only: ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the CandidatoTableSeeder.
@@ -39,7 +35,6 @@ class CandidatoApiController extends AppbaseController
     public function index(Request $request): JsonResponse
     {
         $candidatos = QueryBuilder::for(Candidato::class)
-            ->with([])
             ->allowedFilters(['primer_nombre','segundo_nombre','tercer_nombre','primer_apellido','segundo_apellido','apellido_casada','email','telefono','fecha_nacimiento','expectativa_salarial'])
             ->allowedSorts(['primer_nombre','segundo_nombre','tercer_nombre','primer_apellido','segundo_apellido','apellido_casada','email','telefono','fecha_nacimiento','expectativa_salarial'])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente

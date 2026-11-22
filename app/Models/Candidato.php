@@ -86,7 +86,7 @@ class Candidato extends Model
             'apellido_casada' => 'string',
             'email' => 'string',
             'telefono' => 'string',
-            'fecha_nacimiento' => 'date',
+            'fecha_nacimiento' => 'date:Y-m-d',
             'expectativa_salarial' => 'float',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

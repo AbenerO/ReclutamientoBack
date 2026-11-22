@@ -60,7 +60,6 @@ class AdministradorSeeder extends Seeder
             'ver postulaciones',
             'crear postulaciones',
             'editar postulaciones',
-            'eliminar postulaciones',
 
             // ========================================
             // NOTIFICACIONES

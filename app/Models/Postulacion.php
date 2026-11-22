@@ -66,7 +66,7 @@ class Postulacion extends Model
             'id' => 'integer',
             'candidato_id' => 'integer',
             'vacante_id' => 'integer',
-            'fecha_postulacion' => 'date',
+            'fecha_postulacion' => 'date:Y-m-d',
             'estado_postulacion_id' => 'integer',
             'fuente_reclutamiento_id' => 'integer',
             'user_id' => 'integer',
