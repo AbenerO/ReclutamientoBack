@@ -59,7 +59,7 @@ class Unidad extends Model
             'id' => 'integer',
             'nombre' => 'string',
             'descripcion' => 'string',
-            'activo' => 'string',
+            'activo' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -74,9 +74,9 @@ class Unidad extends Model
      */
     public static $rules =
         [
-            'nombre' => 'required|string',
-            'descripcion' => 'nullable|string',
-            'activo' => 'required|string',
+            'nombre' => 'required|string|max:100',
+            'descripcion' => 'nullable|string|max:255',
+            'activo' => 'required|boolean',
         ];
 
 

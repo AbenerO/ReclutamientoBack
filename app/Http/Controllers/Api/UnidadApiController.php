@@ -16,21 +16,16 @@ use Spatie\QueryBuilder\QueryBuilder;
 /**
  * Class UnidadApiController
  */
-class UnidadApiController extends AppbaseController
+class UnidadApiController extends AppbaseController implements HasMiddleware
 {
-
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver unidades', only: ['index', 'show']),
-  //            new Middleware('abilities:crear unidades', only: ['store']),
-  //            new Middleware('abilities:editar unidades', only: ['update']),
-  //            new Middleware('abilities:eliminar unidades', only: ['destroy']),
-  //        ];
-  //    }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:ver unidades', only: ['index', 'show']),
+            new Middleware('permission:crear unidades', only: ['store']),
+            new Middleware('permission:editar unidades', only: ['update']),
+        ];
+    }
 
     /**
      * Display a listing of the UnidadTableSeeder.
@@ -39,7 +34,6 @@ class UnidadApiController extends AppbaseController
     public function index(Request $request): JsonResponse
     {
         $unidades = QueryBuilder::for(Unidad::class)
-            ->with([])
             ->allowedFilters(['nombre','descripcion','activo'])
             ->allowedSorts(['nombre','descripcion','activo'])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
@@ -83,16 +77,6 @@ class UnidadApiController extends AppbaseController
         $unidad = Unidad::findOrFail($id);
         $unidad->update($request->validated());
         return $this->sendResponse($unidad, 'Unidad actualizado con éxito.');
-    }
-
-    /**
-    * Remove the specified Unidad from storage.
-    * DELETE /unidades/{id}
-    */
-    public function destroy(Unidad $unidad): JsonResponse
-    {
-        $unidad->delete();
-        return $this->sendResponse(null, 'Unidad eliminado con éxito.');
     }
 
     /**

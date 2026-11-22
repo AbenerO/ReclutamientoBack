@@ -15,7 +15,22 @@ class UpdateUnidadApiRequest extends FormRequest
 
     public function rules()
     {
-        return Unidad::$rules;
+        $rules = Unidad::$rules;
+
+        $rules['nombre'] = [
+            'required',
+            'string',
+            'max:100',
+            Rule::unique('unidades', 'nombre')->ignore($this->route('unidad'), 'id'),
+        ];
+
+        return $rules;
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre.unique' => 'Ya existe una unidad con ese nombre.',
+        ];
     }
 }
-

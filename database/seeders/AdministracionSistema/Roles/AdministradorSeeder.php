@@ -60,6 +60,13 @@ class AdministradorSeeder extends Seeder
             'ver postulaciones',
             'crear postulaciones',
             'editar postulaciones',
+            'ver entrevistas',
+            'crear entrevistas',
+            'editar entrevistas',
+            'ver unidades',
+            'crear unidades',
+            'editar unidades',
+            'Ver Menu Catalogos',
             'ver reporte postulaciones',
 
             // ========================================

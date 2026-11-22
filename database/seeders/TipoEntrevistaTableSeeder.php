@@ -11,6 +11,5 @@ class TipoEntrevistaTableSeeder extends Seeder
     {
         TipoEntrevista::updateOrCreate(['nombre' => 'Recursos Humanos']);
         TipoEntrevista::updateOrCreate(['nombre' => 'Técnica']);
-        TipoEntrevista::updateOrCreate(['nombre' => 'Telefónica']);
     }
 }

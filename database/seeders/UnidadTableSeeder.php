@@ -10,23 +10,23 @@ class UnidadTableSeeder extends Seeder
     public function run()
     {
         Unidad::updateOrCreate(
-            ['nombre' => 'Tecnología'],
-            ['descripcion' => 'Desarrollo y soporte de sistemas', 'activo' => true]
+            ['nombre' => 'Desarrollo de software'],
+            ['descripcion' => 'Desarrollo y mantenimiento de sistemas', 'activo' => true]
         );
 
         Unidad::updateOrCreate(
-            ['nombre' => 'Recursos Humanos'],
-            ['descripcion' => 'Gestión del talento humano', 'activo' => true]
+            ['nombre' => 'Soporte técnico IT'],
+            ['descripcion' => 'Soporte técnico y mantenimiento de equipos', 'activo' => true]
         );
 
         Unidad::updateOrCreate(
-            ['nombre' => 'Ventas'],
-            ['descripcion' => 'Área comercial', 'activo' => true]
-        );
-
-        Unidad::updateOrCreate(
-            ['nombre' => 'Finanzas'],
+            ['nombre' => 'Contabilidad'],
             ['descripcion' => 'Contabilidad y finanzas', 'activo' => true]
+        );
+
+        Unidad::updateOrCreate(
+            ['nombre' => 'Contact center'],
+            ['descripcion' => 'Atención y servicio al cliente', 'activo' => true]
         );
     }
 }

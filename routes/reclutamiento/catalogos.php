@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 // Catálogos del módulo de reclutamiento
 
 Route::get('unidades/getColumnas', [UnidadApiController::class, 'getColumnas'])->name('unidades.getColumnas');
-Route::apiResource('unidades', UnidadApiController::class)->parameters(['unidades' => 'unidad']);
+Route::apiResource('unidades', UnidadApiController::class)
+    ->parameters(['unidades' => 'unidad'])
+    ->except('destroy');
 
 Route::get('modalidades/getColumnas', [ModalidadApiController::class, 'getColumnas'])->name('modalidades.getColumnas');
 Route::apiResource('modalidades', ModalidadApiController::class)->parameters(['modalidades' => 'modalidad']);

@@ -1,4 +1,4 @@
-# SysBase — Backend (Laravel 11)
+# SysBase — Backend
 
 Base reutilizable para nuevos sistemas: API REST con autenticación Sanctum (cookie), usuarios, roles y permisos (Spatie), menú dinámico, perfil, notificaciones (correo + WhatsApp Cloud API) y herramientas de desarrollo.
 
@@ -57,15 +57,16 @@ php artisan migrate --seed
 php artisan storage:link
 php artisan serve --host=localhost --port=8000
 ```
-
-Usuario inicial: `admin` / `12345` (rol SuperAdministrador). El login usa el **username**, no el correo.
+```bash
+Usuario inicial: `admin` / `12345` (rol SuperAdministrador). El login usa el **username**
+Usuario reclutador: `reclutador` / `12345` (rol Reclutador). El login usa el **username**
+```
 
 ### Variables `.env` importantes
 
 | Variable | Valor local | Para qué |
 |---|---|---|
 | `DB_*` | ver `.env.example` | Conexión a SQL Server |
-| `DB_ENCRYPT` / `DB_TRUST_SERVER_CERTIFICATE` | `no` / `true` | Conexión local sin certificado (en producción usar `yes` con certificado válido) |
 | `APP_URL` | `http://localhost:8000` | Genera las URL públicas (p. ej. avatares); debe coincidir con el puerto real |
 | `FRONTEND_URL` | `http://localhost:3000` | Origen permitido por CORS |
 | `SANCTUM_STATEFUL_DOMAINS` | `localhost:3000` | Dominios del front que usan cookies de sesión |
@@ -89,17 +90,7 @@ Con el servidor del backend levantado, la página de inicio es:
 
 Caso elegido: **A — Sistema de Reclutamiento y Selección de Personal** (Cooperativa Guayacán).
 
-Diagrama ER: [`docs/ER/ER-RECLUTAMIENTO-SQLSERVER.png`](docs/ER/ER-RECLUTAMIENTO-SQLSERVER.png)
-
-| Tabla | Descripción |
-|---|---|
-| `unidades` | Unidades o departamentos a los que pertenece una vacante |
-| `modalidades`, `estados_vacante`, `estados_postulacion`, `fuentes_reclutamiento`, `tipos_entrevista`, `resultados_entrevista` | Catálogos |
-| `vacantes` | Puesto, descripción, rango salarial, ubicación, estado, unidad y modalidad |
-| `candidatos` | Nombres y apellidos, correo (único), teléfono, fecha de nacimiento, expectativa salarial |
-| `postulaciones` | Candidato + vacante (par único), fecha, estado y fuente de reclutamiento |
-| `postulacion_historial` | Cada cambio de estado de una postulación (las postulaciones no se eliminan, solo cambian de estado) |
-| `entrevistas` | Entrevistas de una postulación: fecha y hora, tipo, entrevistador, resultado y observaciones |
+Diagrama ER: [`docs/ER/ER-RECLUTAMIENTO-GUAYACAN.pdf`](docs/ER/ER-RECLUTAMIENTO-GUAYACAN.pdf)
 
 ## Fase 4 — Mini sistema (Opción B: API Laravel + front Nuxt)
 
@@ -144,27 +135,15 @@ Diagrama ER: [`docs/ER/ER-RECLUTAMIENTO-SQLSERVER.png`](docs/ER/ER-RECLUTAMIENTO
    ```
 6. Abrir <http://localhost:3000>.
 
-> **Por qué `NUXT_PUBLIC_API_BASE_URL` apunta al propio front:** Nuxt reenvía `/api/**` y `/sanctum/**`
-> a `BACKEND_URL` (ver `routeRules` en `nuxt.config.ts`). Así el navegador solo habla con `localhost:3000`
-> y las cookies de Sanctum funcionan aunque el backend esté en `reclutamientoback.test`.
-> Si prefieres no usar el host virtual, también sirve `php artisan serve` con
-> `APP_URL=http://localhost:8000` y `BACKEND_URL=http://localhost:8000`.
+### Usuarios de prueba
 
-### Usuario de prueba
+| Usuario | Contraseña | Rol | Acceso |
+|---|---|---|---|
+| `admin` | `12345` | SuperAdministrador | Todo el sistema |
+| `reclutador` | `12345` | Reclutador | Módulo Reclutamiento y Catálogos → Unidades (sin administración de usuarios, roles ni menú) |
 
-| Campo | Valor |
-|---|---|
-| Usuario | `admin` |
-| Contraseña | `12345` |
-| Rol | SuperAdministrador |
-
-El login usa el **username**, no el correo.
 
 ### Datos de ejemplo (seeders)
-
-`php artisan migrate --seed` carga los catálogos (modalidades, estados, fuentes, tipos y resultados de
-entrevista), 4 unidades, 4 candidatos, 4 vacantes, 4 postulaciones con su historial y 2 entrevistas.
-Los seeders usan `updateOrCreate`, así que se pueden volver a correr sin duplicar datos:
 
 ```bash
 php artisan db:seed

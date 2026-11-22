@@ -18,6 +18,7 @@ class MenuOpcionesTableSeeder extends Seeder
         $this->call([
             MenuInicioSeeder::class,
             MenuReclutamientoSeeder::class,
+            MenuCatalogosSeeder::class,
             MenuAdministracionSeeder::class,
         ]);
     }

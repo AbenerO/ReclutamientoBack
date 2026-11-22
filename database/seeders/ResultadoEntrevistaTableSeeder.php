@@ -11,6 +11,6 @@ class ResultadoEntrevistaTableSeeder extends Seeder
     {
         ResultadoEntrevista::updateOrCreate(['nombre' => 'Pendiente']);
         ResultadoEntrevista::updateOrCreate(['nombre' => 'Aprobado']);
-        ResultadoEntrevista::updateOrCreate(['nombre' => 'Rechazado']);
+        ResultadoEntrevista::updateOrCreate(['nombre' => 'No aprobado']);
     }
 }

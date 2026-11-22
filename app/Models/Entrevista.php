@@ -57,12 +57,12 @@ class Entrevista extends Model
      */
     public static $rules =
         [
-            'postulacion_id' => 'required|integer',
+            'postulacion_id' => 'required|integer|exists:postulaciones,id',
             'fecha_hora' => 'required|date',
-            'tipo_entrevista_id' => 'required|integer',
-            'entrevistador_id' => 'required|integer',
-            'resultado_entrevista_id' => 'required|integer',
-            'observaciones' => 'nullable|string',
+            'tipo_entrevista_id' => 'required|integer|exists:tipos_entrevista,id',
+            'entrevistador_id' => 'required|integer|exists:users,id',
+            'resultado_entrevista_id' => 'required|integer|exists:resultados_entrevista,id',
+            'observaciones' => 'nullable|string|max:500',
             'user_id' => 'required|integer',
         ];
 

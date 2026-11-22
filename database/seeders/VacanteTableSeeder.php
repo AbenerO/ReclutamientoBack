@@ -18,8 +18,8 @@ class VacanteTableSeeder extends Seeder
         Vacante::updateOrCreate(
             ['titulo' => 'Desarrollador Laravel'],
             [
-                'unidad_id' => Unidad::where('nombre', 'Tecnología')->value('id'),
-                'descripcion' => 'Se busca desarrollador Laravel para el área de Tecnología.',
+                'unidad_id' => Unidad::where('nombre', 'Desarrollo de software')->value('id'),
+                'descripcion' => 'Se busca desarrollador Laravel para el área de Desarrollo de software.',
                 'modalidad_id' => Modalidad::where('nombre', 'Híbrido')->value('id'),
                 'salario_minimo' => 7000,
                 'salario_maximo' => 10000,
@@ -30,10 +30,10 @@ class VacanteTableSeeder extends Seeder
         );
 
         Vacante::updateOrCreate(
-            ['titulo' => 'Analista de Reclutamiento'],
+            ['titulo' => 'Técnico de Soporte'],
             [
-                'unidad_id' => Unidad::where('nombre', 'Recursos Humanos')->value('id'),
-                'descripcion' => 'Se busca analista de reclutamiento para el área de Recursos Humanos.',
+                'unidad_id' => Unidad::where('nombre', 'Soporte técnico IT')->value('id'),
+                'descripcion' => 'Se busca técnico de soporte para el área de Soporte técnico IT.',
                 'modalidad_id' => Modalidad::where('nombre', 'Presencial')->value('id'),
                 'salario_minimo' => 5000,
                 'salario_maximo' => 7000,
@@ -44,15 +44,15 @@ class VacanteTableSeeder extends Seeder
         );
 
         Vacante::updateOrCreate(
-            ['titulo' => 'Ejecutivo de Ventas'],
+            ['titulo' => 'Agente de Contact Center'],
             [
-                'unidad_id' => Unidad::where('nombre', 'Ventas')->value('id'),
-                'descripcion' => 'Se busca ejecutivo de ventas para el área comercial.',
+                'unidad_id' => Unidad::where('nombre', 'Contact center')->value('id'),
+                'descripcion' => 'Se busca agente para el área de Contact center.',
                 'modalidad_id' => Modalidad::where('nombre', 'Presencial')->value('id'),
                 'salario_minimo' => 4500,
                 'salario_maximo' => 6500,
                 'ubicacion' => 'Quetzaltenango',
-                'estado_vacante_id' => EstadoVacante::where('nombre', 'En proceso')->value('id'),
+                'estado_vacante_id' => EstadoVacante::where('nombre', 'Abierta')->value('id'),
                 'user_id' => $user->id,
             ]
         );
@@ -60,8 +60,8 @@ class VacanteTableSeeder extends Seeder
         Vacante::updateOrCreate(
             ['titulo' => 'Contador General'],
             [
-                'unidad_id' => Unidad::where('nombre', 'Finanzas')->value('id'),
-                'descripcion' => 'Se busca contador general para el área de Finanzas.',
+                'unidad_id' => Unidad::where('nombre', 'Contabilidad')->value('id'),
+                'descripcion' => 'Se busca contador general para el área de Contabilidad.',
                 'modalidad_id' => Modalidad::where('nombre', 'Remoto')->value('id'),
                 'salario_minimo' => 6000,
                 'salario_maximo' => 8500,

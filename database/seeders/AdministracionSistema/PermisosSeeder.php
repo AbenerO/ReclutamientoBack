@@ -63,6 +63,16 @@ class PermisosSeeder extends Seeder
                 ['name' => 'crear postulaciones', 'subject' => 'Postulacion'],
                 ['name' => 'editar postulaciones', 'subject' => 'Postulacion'],
 
+                // Entrevistas
+                ['name' => 'ver entrevistas', 'subject' => 'Entrevista'],
+                ['name' => 'crear entrevistas', 'subject' => 'Entrevista'],
+                ['name' => 'editar entrevistas', 'subject' => 'Entrevista'],
+
+                // Unidades (catálogo)
+                ['name' => 'ver unidades', 'subject' => 'Unidad'],
+                ['name' => 'crear unidades', 'subject' => 'Unidad'],
+                ['name' => 'editar unidades', 'subject' => 'Unidad'],
+
                 // Reportes
                 ['name' => 'ver reporte postulaciones', 'subject' => 'ReportePostulacion'],
             ],

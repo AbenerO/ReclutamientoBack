@@ -14,5 +14,6 @@ class FuenteReclutamientoTableSeeder extends Seeder
         FuenteReclutamiento::updateOrCreate(['nombre' => 'Sitio web']);
         FuenteReclutamiento::updateOrCreate(['nombre' => 'Computrabajo']);
         FuenteReclutamiento::updateOrCreate(['nombre' => 'Facebook']);
+        FuenteReclutamiento::updateOrCreate(['nombre' => 'Otro']);
     }
 }

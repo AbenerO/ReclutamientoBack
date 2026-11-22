@@ -16,21 +16,16 @@ use Spatie\QueryBuilder\QueryBuilder;
 /**
  * Class EntrevistaApiController
  */
-class EntrevistaApiController extends AppbaseController
+class EntrevistaApiController extends AppbaseController implements HasMiddleware
 {
-
-      /**
-  //     * @return array
-  //     */
-  //    public static function middleware(): array
-  //    {
-  //        return [
-  //            new Middleware('abilities:ver entrevistas', only: ['index', 'show']),
-  //            new Middleware('abilities:crear entrevistas', only: ['store']),
-  //            new Middleware('abilities:editar entrevistas', only: ['update']),
-  //            new Middleware('abilities:eliminar entrevistas', only: ['destroy']),
-  //        ];
-  //    }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:ver entrevistas', only: ['index', 'show']),
+            new Middleware('permission:crear entrevistas', only: ['store']),
+            new Middleware('permission:editar entrevistas', only: ['update']),
+        ];
+    }
 
     /**
      * Display a listing of the EntrevistaTableSeeder.
@@ -39,7 +34,7 @@ class EntrevistaApiController extends AppbaseController
     public function index(Request $request): JsonResponse
     {
         $entrevistas = QueryBuilder::for(Entrevista::class)
-            ->with([])
+            ->allowedIncludes(['postulacion', 'tipoEntrevista', 'resultadoEntrevista', 'entrevistador'])
             ->allowedFilters(['postulacion_id','fecha_hora','tipo_entrevista_id','entrevistador_id','resultado_entrevista_id','observaciones','user_id'])
             ->allowedSorts(['postulacion_id','fecha_hora','tipo_entrevista_id','entrevistador_id','resultado_entrevista_id','observaciones','user_id'])
             ->defaultSort('-id') // Ordenar por defecto por fecha descendente
@@ -67,8 +62,12 @@ class EntrevistaApiController extends AppbaseController
      * Display the specified Entrevista.
      * GET|HEAD /entrevistas/{id}
      */
-    public function show(Entrevista $entrevista)
+    public function show($id)
     {
+        $entrevista = QueryBuilder::for(Entrevista::class)
+            ->allowedIncludes(['postulacion', 'tipoEntrevista', 'resultadoEntrevista', 'entrevistador'])
+            ->findOrFail($id);
+
         return $this->sendResponse($entrevista->toArray(), 'Entrevista recuperado con éxito.');
     }
 
@@ -83,16 +82,6 @@ class EntrevistaApiController extends AppbaseController
         $entrevista = Entrevista::findOrFail($id);
         $entrevista->update($request->validated());
         return $this->sendResponse($entrevista, 'Entrevista actualizado con éxito.');
-    }
-
-    /**
-    * Remove the specified Entrevista from storage.
-    * DELETE /entrevistas/{id}
-    */
-    public function destroy(Entrevista $entrevista): JsonResponse
-    {
-        $entrevista->delete();
-        return $this->sendResponse(null, 'Entrevista eliminado con éxito.');
     }
 
     /**

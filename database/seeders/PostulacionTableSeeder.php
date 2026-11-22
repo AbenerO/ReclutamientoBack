@@ -45,7 +45,7 @@ class PostulacionTableSeeder extends Seeder
         Postulacion::updateOrCreate(
             [
                 'candidato_id' => Candidato::where('email', 'luis.ramirez@gmail.com')->value('id'),
-                'vacante_id' => Vacante::where('titulo', 'Ejecutivo de Ventas')->value('id'),
+                'vacante_id' => Vacante::where('titulo', 'Agente de Contact Center')->value('id'),
             ],
             [
                 'fecha_postulacion' => '2026-11-05',
@@ -58,7 +58,7 @@ class PostulacionTableSeeder extends Seeder
         Postulacion::updateOrCreate(
             [
                 'candidato_id' => Candidato::where('email', 'ana.hernandez@gmail.com')->value('id'),
-                'vacante_id' => Vacante::where('titulo', 'Analista de Reclutamiento')->value('id'),
+                'vacante_id' => Vacante::where('titulo', 'Técnico de Soporte')->value('id'),
             ],
             [
                 'fecha_postulacion' => '2026-11-07',

@@ -3,6 +3,7 @@
 namespace Database\Seeders\AdministracionSistema;
 
 use Database\Seeders\AdministracionSistema\Roles\AdministradorSeeder;
+use Database\Seeders\AdministracionSistema\Roles\ReclutadorSeeder;
 use Database\Seeders\AdministracionSistema\Roles\SuperAdministradorSeeder;
 use Illuminate\Database\Seeder;
 
@@ -17,10 +18,10 @@ class RolesTableSeeder extends Seeder
         // Primero crear todos los permisos
         $this->call(PermisosSeeder::class);
 
-        // Luego crear cada rol con sus permisos
         $this->call([
             SuperAdministradorSeeder::class,
             AdministradorSeeder::class,
+            ReclutadorSeeder::class,
         ]);
     }
 }
