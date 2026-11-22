@@ -18,6 +18,18 @@ class DatabaseSeeder extends Seeder
             MenuOpcionesTableSeeder::class,
             AdministracionSistemaSeeder::class,
             DepartamentosMunicipiosSeeder::class,
+            UnidadTableSeeder::class,
+            ModalidadTableSeeder::class,
+            EstadoVacanteTableSeeder::class,
+            EstadoPostulacionTableSeeder::class,
+            FuenteReclutamientoTableSeeder::class,
+            TipoEntrevistaTableSeeder::class,
+            ResultadoEntrevistaTableSeeder::class,
+            CandidatoTableSeeder::class,
+            VacanteTableSeeder::class,
+            PostulacionTableSeeder::class,
+            PostulacionHistorialTableSeeder::class,
+            EntrevistaTableSeeder::class,
         ]);
     }
 }
