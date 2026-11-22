@@ -19,12 +19,13 @@ class UpdatePostulacionApiRequest extends FormRequest
             'candidato_id' => [
                 'required',
                 'integer',
-                Rule::unique('postulaciones', 'candidato_id')->ignore($this->route('postulacion')?->id ?? null, 'id'),
+                Rule::unique('postulaciones', 'candidato_id')
+                    ->where('vacante_id', $this->vacante_id)
+                    ->ignore($this->route('postulacion')?->id ?? null, 'id'),
             ],
             'vacante_id' => [
                 'required',
                 'integer',
-                Rule::unique('postulaciones', 'vacante_id')->ignore($this->route('postulacion')?->id ?? null, 'id'),
             ],
             'fecha_postulacion' => [
                 'required',
@@ -44,6 +45,13 @@ class UpdatePostulacionApiRequest extends FormRequest
             ],
         ];
 
+    }
+
+    public function messages()
+    {
+        return [
+            'candidato_id.unique' => 'El candidato ya está postulado a esta vacante.',
+        ];
     }
 }
 

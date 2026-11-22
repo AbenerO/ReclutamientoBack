@@ -83,8 +83,8 @@ class Postulacion extends Model
      */
     public static $rules =
         [
-            'candidato_id' => 'required|integer|unique:postulaciones,candidato_id',
-            'vacante_id' => 'required|integer|unique:postulaciones,vacante_id',
+            'candidato_id' => 'required|integer',
+            'vacante_id' => 'required|integer',
             'fecha_postulacion' => 'required|date',
             'estado_postulacion_id' => 'required|integer',
             'fuente_reclutamiento_id' => 'required|integer',
